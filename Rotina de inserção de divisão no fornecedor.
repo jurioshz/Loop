@@ -1,0 +1,15 @@
+-- Loop que consiste em inserir a divisão no fornecedor (Roda a cada 30min no Job criado pelo o Mago)
+
+BEGIN 
+  FOR T
+      IN (SELECT X.SEQFORNECCONTATO, X.NRODIVISAO, X.EMAIL 
+               FROM MAF_FORNECCONTATO X 
+               WHERE NRODIVISAO IS NULL)  
+LOOP
+UPDATE MAF_FORNECCONTATO X
+SET X.NRODIVISAO = 1 
+WHERE X.SEQFORNECCONTATO = T.SEQFORNECCONTATO;
+END LOOP;
+COMMIT;
+END;
+
